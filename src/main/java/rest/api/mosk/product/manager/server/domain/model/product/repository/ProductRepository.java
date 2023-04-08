@@ -5,7 +5,7 @@ import rest.api.mosk.product.manager.server.domain.model.product.Product;
 
 import java.util.Optional;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>, CustomProductRepository {
 
     Optional<Product> findByName(final String name);
 }

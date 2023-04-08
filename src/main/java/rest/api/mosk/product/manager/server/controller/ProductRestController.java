@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import rest.api.mosk.product.manager.server.api.ProductReadService;
 import rest.api.mosk.product.manager.server.api.ProductService;
 import rest.api.mosk.product.manager.server.domain.model.product.dto.CreateProductRequest;
+import rest.api.mosk.product.manager.server.domain.model.product.dto.ProductAndCategoryResponse;
 import rest.api.mosk.product.manager.server.domain.model.product.dto.SimpleProductResponse;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class ProductRestController {
     }
 
     @GetMapping("/products/search")
-    public ResponseEntity<SimpleProductResponse> findByName(@RequestParam(name = "name") final String name) {
-        return ResponseEntity.status(HttpStatus.OK).body(productReadService.findByName(name));
+    public ResponseEntity<ProductAndCategoryResponse> findByName(@RequestParam(name = "name") final String name) {
+        return ResponseEntity.status(HttpStatus.OK).body(productReadService.findProductWithCategory(name));
     }
 
     @GetMapping("/products/all")

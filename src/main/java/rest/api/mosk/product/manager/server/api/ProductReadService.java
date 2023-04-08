@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rest.api.mosk.product.manager.server.domain.model.product.Product;
+import rest.api.mosk.product.manager.server.domain.model.product.dto.ProductAndCategoryResponse;
 import rest.api.mosk.product.manager.server.domain.model.product.dto.SimpleProductResponse;
 import rest.api.mosk.product.manager.server.domain.model.product.repository.ProductRepository;
 
@@ -25,6 +26,11 @@ public class ProductReadService {
         );
 
         return SimpleProductResponse.of(findProduct);
+    }
+
+    public ProductAndCategoryResponse findProductWithCategory(final String name) {
+        return productRepository.findProductWithCategory(name)
+                .orElseThrow( () -> new IllegalStateException("찾을 수 없음"));
     }
 
     public List<SimpleProductResponse> findAll() {
