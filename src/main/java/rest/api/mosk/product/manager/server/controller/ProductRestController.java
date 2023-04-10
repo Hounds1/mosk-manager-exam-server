@@ -1,5 +1,6 @@
 package rest.api.mosk.product.manager.server.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,8 @@ public class ProductRestController {
         return ResponseEntity.status(HttpStatus.OK).body(productService.create(request.toEntity(), request.getCategoryName()));
     }
 
+
+    @HystrixCommand(fallbackMethod = "fallback")
     @GetMapping("/products/search")
     public ResponseEntity<ProductAndCategoryResponse> findByName(@RequestParam(name = "name") final String name) {
         return ResponseEntity.status(HttpStatus.OK).body(productReadService.findProductWithCategory(name));
@@ -35,5 +38,10 @@ public class ProductRestController {
     @GetMapping("/products/all")
     public ResponseEntity<List<SimpleProductResponse>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(productReadService.findAll());
+    }
+
+    public ResponseEntity<String> fallback() {
+        String message = "불러올 수 없는 상태입니다.";
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(message);
     }
 }
