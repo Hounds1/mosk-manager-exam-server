@@ -22,6 +22,6 @@ public class FileData {
 
     private String filePath;
 
-    @OneToOne(mappedBy = "product_id")
+    @OneToOne(mappedBy = "fileData")
     private Product product;
 }

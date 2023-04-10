@@ -15,4 +15,6 @@ public class ProductAndCategoryResponse {
 
     private String CategoryName;
 
+    private Long fileId;
+
 }
