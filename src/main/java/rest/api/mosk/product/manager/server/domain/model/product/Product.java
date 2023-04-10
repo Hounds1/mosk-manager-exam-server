@@ -22,6 +22,8 @@ public class Product {
 
     private int price;
 
+    private String storeName;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")

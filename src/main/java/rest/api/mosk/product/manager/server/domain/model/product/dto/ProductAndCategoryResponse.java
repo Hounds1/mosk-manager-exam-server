@@ -13,6 +13,8 @@ public class ProductAndCategoryResponse {
 
     private int price;
 
+    private String storeName;
+
     private String CategoryName;
 
     private Long fileId;
